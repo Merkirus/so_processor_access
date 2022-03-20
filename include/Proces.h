@@ -16,6 +16,7 @@ public:
     void zeroOczekiwanie();
     void setIndex(int indeks);
     int getIndex() const;
+    bool operator==(const Proces& p);
 private:
     int waga;
     int oczekiwanie;

@@ -38,3 +38,8 @@ void Proces::setIndex(int indeks) {
 int Proces::getIndex() const {
     return index;
 }
+
+bool Proces::operator==(const Proces& p) {
+    return (this == &p);
+}
+

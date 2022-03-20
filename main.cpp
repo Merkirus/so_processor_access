@@ -26,5 +26,9 @@ auto main() -> int {
 
 	// rr.display();
 
+	SJFW s (procesy);
+	s.runIt();
+	s.displayIt();
+
 	return 0;
 }
