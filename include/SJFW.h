@@ -16,7 +16,7 @@ public:
 	void display();
 private:
 	std::vector<Proces> v;
-	std::map<int, int> dane;
+	std::map<int, std::vector<int>> dane;
 	std::map<int, int> wagi;
 	int rozmiar;
 	int count;

@@ -11,6 +11,7 @@ class Random {
 public:
     Random()=default;
     static int guess();
+    static int guess(int mnoznik);
 private:
     static std::random_device rd;
     static std::mt19937 mt;

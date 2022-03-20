@@ -24,8 +24,8 @@ double Generator::randomize() {
     return distribution(generator);
 }
 
-double Generator::mean = 10.0;
-double Generator::dev = 2.5;
+double Generator::mean = 50.0;
+double Generator::dev = 15.0;
 
 std::default_random_engine Generator::generator = std::default_random_engine();
 

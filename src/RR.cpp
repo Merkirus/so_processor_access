@@ -10,23 +10,20 @@
 
 void RR::run() {
     while (!v.empty() && rozmiar != 200) {
-        // Iteruje nowo dodane procesy
-        if (add > 0) {
+        auto b = v.begin();
+        auto e = v.end();
+        calculate(b,e);
+        while (add != 0) {
             int temp = add;
             add = 0;
-            calculate(v.end()-temp, v.end());
-        } else {
-            calculate(v.begin(), v.end());
+            b = v.end()-add;
+            e = v.end();
+            calculate(b,e);
         }
         auto end = std::remove_if(v.begin(),
          v.end(),
          [](Proces& p) {return p.getWaga() <= 0;});
         v.erase(end, v.end());
-        for (int i=0; i < add; ++i) {
-            v.push_back(Generator::generujProces());
-            v.at(v.size()-1).setIndex(rozmiar-add+i);
-            wagaAdd += v.at(v.size()-1).getWaga();
-        }
     }
 }
 
@@ -48,23 +45,20 @@ wagaAdd{0} {
 void RR::calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> end) {
     for (auto it = begin; it != end; ++it) {
         int czas = it->getWaga();
-        count += it->getWaga()>=interwal ? interwal : it->getWaga();
-        it->setWaga(interwal);
         int zmienna = it->getWaga() >= interwal ? interwal : it->getWaga();
-        for (int i = 0; i < zmienna; ++i) {
-            if (Random::guess() == 1) {
-                ++add;
-                ++rozmiar;
-            }
+        count += zmienna;
+        it->setWaga(zmienna);
+        if (Random::guess(zmienna) == 1) {
+            v.push_back(Generator::generujProces());
+            v.back().setIndex(rozmiar);
+            wagaAdd += v.back().getWaga();
+            ++add;
+            ++rozmiar;
         }
         ++kontekst;
         auto match = dane.find(it->getIndex());
         if (match != dane.end()) {
-            std::vector<int> temp;
-            temp.reserve(match->second.size() + 1);
-            temp.insert(temp.begin(), match->second.begin(), match->second.end());
-            temp.push_back(it->getOczekiwanie());
-            match->second = temp;
+            match->second.push_back(it->getOczekiwanie());
         } else {
             dane.insert(std::pair<int, std::vector<int>> (it->getIndex(), std::vector{it->getOczekiwanie()}));
         }
@@ -79,6 +73,7 @@ void RR::display() {
     std::cout << "Średnia waga procesu: " << count / rozmiar << '\n';
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
     std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
+    int suma = 0;
     for (int i=0; i < rozmiar; ++i) {
         auto temp = dane.find(i);
         int sum = 0;
@@ -86,6 +81,9 @@ void RR::display() {
             std::cout << elem << '\n';
             sum+=elem;
         }
-        std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << sum/temp->second.size() << '\n';
+        int temp2 = sum/temp->second.size();
+        suma += temp2;
+        std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << temp2  << '\n';
     }
+    std::cout << "Łączny średni czas oczekiwania: " << suma/rozmiar << '\n';
 }

@@ -25,46 +25,60 @@ wagaAdd{0} {
 
 void SJFW::run() {
 	while (!v.empty() && rozmiar != 200) {
-        while (v.front().getWaga()>0) {
+        auto curr = v.front();
+        auto match = dane.find(curr.getIndex());
+        if (match != dane.end()) {
+             match->second.push_back(curr.getOczekiwanie());
+        } else {
+            dane.insert(std::pair<int, std::vector<int>> (curr.getIndex(), std::vector{curr.getOczekiwanie()}));
+        }
+        while (v.front().getWaga() > 0) {
             v.front().setWaga();
-            auto match = dane.find(v.front().getIndex());
-            if (match != dane.end()) {
-                match->second += v.front().getOczekiwanie();
-            } else {
-                dane.insert(std::pair<int,int> (v.front().getIndex(), v.front().getOczekiwanie()));
-            }
             for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(1);});
             v.front().zeroOczekiwanie();
             if (Random::guess() == 1) {
                 v.push_back(Generator::generujProces());
-                wagaAdd += v.at(v.size()-1).getWaga();
+                wagaAdd += v.back().getWaga();
+                v.back().setIndex(rozmiar);
                 ++rozmiar;
-                v.at(v.size()-1).setIndex(rozmiar-1);
-                auto temp = v.at(v.size()-1);
+                auto temp = v.back();
                 wagi.insert(std::pair<int,int> (temp.getIndex(), temp.getWaga()));
+                dane.insert(std::pair<int,int> (temp.getIndex(), temp.getOczekiwanie()));
                 sort(v.begin(), v.end(), [](Proces& p1, Proces& p2) -> bool {return p1.getWaga() < p2.getWaga();});
-                if (temp == v.front()) {
+                if (temp.getIndex() == v.front().getIndex()) {
                 	++kontekst;
+                    ++count;
+                    break;
                 }
             }
             ++count;
-            if (v.front().getWaga() <= 0) {
-                v.erase(v.begin());
-            }
         }
+        auto end = std::remove_if(v.begin(), v.end(), [](Proces& p) {return p.getWaga() <= 0;});
+        v.erase(end, v.end());
         ++kontekst;
 	}
 }
 
 void SJFW::display() {
+    std::cout << "DANE: " << dane.size() << " ROZMAIR: " << rozmiar << " WAGA: " << wagi.size() << '\n';
 	std::cout << "Waga początkowych procesów: " << wagaInit << '\n';
 	std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
 	std::cout << "Średnia waga procesu: " << count/rozmiar << '\n';
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
     std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
-    for (int i=0; i < dane.size(); ++i) {
-    	std::cout << "Index: " << i << " Waga: " << wagi.at(i)  << " Czas oczekiwania: " << dane.at(i) << '\n';
+    int suma = 0;
+    for (int i=0; i < rozmiar; ++i) {
+        auto temp = dane.find(i);
+        int sum = 0;
+        for (int elem : temp->second) {
+            std::cout << elem << '\n';
+            sum+=elem;
+        }
+        int temp2 = sum/temp->second.size();
+        suma += temp2;
+        std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << temp2  << '\n';
     }
+    std::cout << "Łączny średni czas oczekiwania: " << suma/rozmiar << '\n';
     if (!v.empty()) {
     	std::cout << "Procesy zagłodzone: " << '\n';
     	for (Proces p : v) {

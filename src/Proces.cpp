@@ -5,7 +5,7 @@
 #include "Proces.h"
 #include <cmath>
 
-Proces::Proces(int waga) : waga{abs(waga)==0 ? 1 : abs(waga)}, oczekiwanie{0}, index{0} {}
+Proces::Proces(int waga) : waga{abs(waga) == 0 ? 1 : abs(waga)}, oczekiwanie{0}, index{0} {}
 
 int Proces::getWaga() const {
     return waga;
