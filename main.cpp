@@ -1,17 +1,29 @@
 #include <vector>
+#include <iostream>
 #include "Proces.h"
 #include "Generator.h"
 #include "RR.h"
+#include "FCFS.h"
 
 using namespace std;
 
 auto main() -> int {
 
-	std::vector<Proces> procesy {Generator::generujProcesy(50)};
+	std::vector<Proces> procesy {Generator::generujProcesy(10)};
 
-	RR r(procesy, 5);
+	// FCFS fcfs (procesy);
 
-	r.run();
+	// RR rr (procesy, 5);
+
+	// fcfs.run();
+
+	// rr.run();
+
+	// fcfs.display();
+
+	// cout << "----------------" << '\n';
+
+	// rr.display();
 
 	return 0;
 }

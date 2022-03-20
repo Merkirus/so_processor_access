@@ -2,8 +2,8 @@
 // Created by Rafał Mielniczuk on 15/03/2022.
 //
 
-#ifndef SOLAB1_PROCES_H
-#define SOLAB1_PROCES_H
+#ifndef PROCES_H
+#define PROCES_H
 
 class Proces {
 public:
@@ -11,11 +11,15 @@ public:
     int getWaga() const;
     void setWaga();
     void setWaga(int interwal);
-    int getOczekiwanie () const;
+    int getOczekiwanie() const;
     void setOczekiwanie(int czas);
+    void zeroOczekiwanie();
+    void setIndex(int indeks);
+    int getIndex() const;
 private:
     int waga;
     int oczekiwanie;
+    int index;
 };
 
-#endif //SOLAB1_PROCES_H
+#endif //PROCES_H

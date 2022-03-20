@@ -2,8 +2,8 @@
 // Created by Rafał Mielniczuk on 15/03/2022.
 //
 
-#ifndef SOLAB1_GENERATOR_H
-#define SOLAB1_GENERATOR_H
+#ifndef GENERATOR_H
+#define GENERATOR_H
 
 #include <vector>
 #include <random>
@@ -23,4 +23,4 @@ private:
     static double randomize();
 };
 
-#endif //SOLAB1_GENERATOR_H
+#endif //GENERATOR_H

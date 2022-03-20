@@ -2,8 +2,8 @@
 // Created by Rafał Mielniczuk on 17/03/2022.
 //
 
-#ifndef SOLAB1_RANDOM_H
-#define SOLAB1_RANDOM_H
+#ifndef RANDOM_H
+#define RANDOM_H
 
 #include <random>
 
@@ -17,4 +17,4 @@ private:
     static std::uniform_int_distribution<int> guessNumber;
 };
 
-#endif //SOLAB1_RANDOM_H
+#endif //RANDOM_H

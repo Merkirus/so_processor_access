@@ -5,7 +5,7 @@
 #include "Proces.h"
 #include <cmath>
 
-Proces::Proces(int waga) : waga{abs(waga)==0 ? 1 : abs(waga)}, oczekiwanie{0} {}
+Proces::Proces(int waga) : waga{abs(waga)==0 ? 1 : abs(waga)}, oczekiwanie{0}, index{0} {}
 
 int Proces::getWaga() const {
     return waga;
@@ -25,4 +25,16 @@ int Proces::getOczekiwanie() const {
 
 void Proces::setOczekiwanie(int czas) {
     oczekiwanie += czas;
+}
+
+void Proces::zeroOczekiwanie() {
+    oczekiwanie = 0;
+}
+
+void Proces::setIndex(int indeks) {
+    index = indeks;
+}
+
+int Proces::getIndex() const {
+    return index;
 }

@@ -11,6 +11,7 @@ std::vector<Proces> Generator::generujProcesy(int liczba) {
     v.reserve(liczba);
 for (int i=0; i < liczba; i++) {
         v.push_back(generujProces());
+        v.at(i).setIndex(i);
     }
     return v;
 }

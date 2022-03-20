@@ -7,16 +7,27 @@
 #include "FCFS.h"
 #include "Generator.h"
 
-FCFS::FCFS(std::vector<Proces> v) : v{v}, dane{}, rozmiar{static_cast<int>(v.size())}, count{0}, kontekst{0}, add{0} {}
+FCFS::FCFS(std::vector<Proces> v) :
+v{v},
+dane{},
+rozmiar{static_cast<int>(v.size())},
+count{0},
+kontekst{0},
+wagaInit{0},
+wagaAdd{0} {
+    int sum = 0;
+    for_each(v.begin(), v.end(), [&](Proces& p) {sum+=p.getWaga();});
+    wagaInit = sum;
+}
 
 void FCFS::run() {
-
-    while (!v.empty() && rozmiar != 20000) {
+    while (!v.empty() && rozmiar != 200) {
         int czas = v.front().getWaga();
         while (v.front().getWaga()>0) {
             v.front().setWaga();
             if (Random::guess() == 1) {
                 v.push_back(Generator::generujProces());
+                wagaAdd += v.at(v.size()-1).getWaga();
                 ++rozmiar;
             }
             ++count;
@@ -27,10 +38,14 @@ void FCFS::run() {
         for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(czas);});
         ++kontekst;
     }
+}
 
-    std::cout << "Średni czas: " << (count+kontekst) / rozmiar << '\n';
-    std::cout << "Oczekiwanie" << '\n';
+void FCFS::display() {
+    std::cout << "Waga początkowych procesów: " << wagaInit << '\n';
+    std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
+    std::cout << "Średnia waga procesu: " << (count+kontekst) / rozmiar << '\n';
+    std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     for (int i=0; i < dane.size(); ++i) {
-        std::cout << "Index: " << i << " Czas: " << dane.at(i) << '\n';
+        std::cout << "Index: " << i << " Czas oczekiwania: " << dane.at(i) << '\n';
     }
 }
