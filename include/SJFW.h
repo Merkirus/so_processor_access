@@ -12,11 +12,12 @@
 class SJFW {
 public:
 	SJFW(std::vector<Proces> v);
-	void runIt();
-	void displayIt();
+	void run();
+	void display();
 private:
 	std::vector<Proces> v;
 	std::map<int, int> dane;
+	std::map<int, int> wagi;
 	int rozmiar;
 	int count;
 	int kontekst;
