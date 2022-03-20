@@ -4,6 +4,7 @@
 #include "Generator.h"
 #include "RR.h"
 #include "FCFS.h"
+#include "SJFW.h"
 
 using namespace std;
 

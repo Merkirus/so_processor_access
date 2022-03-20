@@ -431,8 +431,7 @@ CMakeFiles/main.dir/main.cpp.o: ../main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/optional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__tree \
   ../include/FCFS.h \
-  ../include/SJFW.h \
-  ../include/wSJF.h
+  ../include/SJFW.h
 
 CMakeFiles/main.dir/src/FCFS.cpp.o: ../src/FCFS.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/iostream \
@@ -2971,8 +2970,6 @@ CMakeFiles/main.dir/src/Random.cpp.o: ../src/Random.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/wchar.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__algorithm/push_heap.h:
-
-../include/wSJF.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/sys/_types/_uintptr_t.h:
 

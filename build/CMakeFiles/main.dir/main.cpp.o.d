@@ -429,5 +429,4 @@ CMakeFiles/main.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/optional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__tree \
   /Users/frafau/Documents/CppProjects/SO_LAB_1/include/FCFS.h \
-  /Users/frafau/Documents/CppProjects/SO_LAB_1/include/SJFW.h \
-  /Users/frafau/Documents/CppProjects/SO_LAB_1/include/wSJF.h
+  /Users/frafau/Documents/CppProjects/SO_LAB_1/include/SJFW.h
