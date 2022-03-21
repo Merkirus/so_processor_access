@@ -10,7 +10,7 @@ using namespace std;
 
 auto main() -> int {
 
-	std::vector<Proces> procesy {Generator::generujProcesy(50)};
+	std::vector<Proces> procesy {Generator::generujProcesy(150)};
 	// std::vector<Proces> procesy1 {Generator::generujProcesy(50)};
 	// std::vector<Proces> procesy2 {Generator::generujProcesy(50)};
 	// std::vector<Proces> procesy3 {Generator::generujProcesy(50)};
