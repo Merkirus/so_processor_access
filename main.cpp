@@ -24,7 +24,7 @@ auto main() -> int {
 	// FCFS fcfs4 (procesy4);
 	// FCFS fcfs5 (procesy5);
 
-	RR rr (procesy, 10);
+	RR rr (procesy, 30);
 	// RR rr1 (procesy1, 5);
 	// RR rr2 (procesy2, 5);
 	// RR rr3 (procesy3, 5);
@@ -38,12 +38,15 @@ auto main() -> int {
 	// SJFW sjfw4 (procesy4);
 	// SJFW sjfw5 (procesy5);
 	
-	// fcfs.run();
-	// rr.run();
+	fcfs.run();
+	rr.run();
 	sjfw.run();
 
-	// fcfs.display();
-	// rr.display();
+	cout << "------------" << '\n';
+	fcfs.display();
+	cout << "------------" << '\n';
+	rr.display();
+	cout << "------------" << '\n';
 	sjfw.display();
 
 	return 0;

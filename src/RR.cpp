@@ -71,9 +71,10 @@ void RR::calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> en
 void RR::display() {
     std::cout << "Waga początkowych procesów: " << wagaInit << '\n';
     std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
-    std::cout << "Średnia waga procesu: " << count / rozmiar << '\n';
+    std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
+    std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
-    std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
+    // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     int suma = 0;
     for (int i=0; i < rozmiar; ++i) {
         auto temp = dane.find(i);
@@ -84,7 +85,7 @@ void RR::display() {
             }
             int temp2 = sum/temp->second.size();
             suma += temp2;
-            std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << temp2  << '\n';
+            // std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << temp2  << '\n';
         }
     }
     std::cout << "Łączny średni czas oczekiwania: " << suma/rozmiar << '\n';

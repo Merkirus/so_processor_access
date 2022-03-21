@@ -63,15 +63,16 @@ void SJFW::run() {
 void SJFW::display() {
 	std::cout << "Waga początkowych procesów: " << wagaInit << '\n';
 	std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
-	std::cout << "Średnia waga procesu: " << count/rozmiar << '\n';
+    std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
+	std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
-    std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
+    // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     int suma = 0;
     for (int i=0; i < rozmiar; ++i) {
         auto match = dane.find(i);
         if (match != dane.end()) {
             suma += match->second;
-            std::cout << "Index: " << match->first  << " Średni czas oczekiwania: " << match->second << " Waga: " << wagi.at(match->first)  << '\n'; 
+            // std::cout << "Index: " << match->first  << " Średni czas oczekiwania: " << match->second << " Waga: " << wagi.at(match->first)  << '\n'; 
         }
     }
     std::cout << "Łączny średni czas oczekiwania: " << suma/rozmiar << '\n';

@@ -43,10 +43,14 @@ void FCFS::run() {
 void FCFS::display() {
     std::cout << "Waga początkowych procesów: " << wagaInit << '\n';
     std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
-    std::cout << "Średnia waga procesu: " << count/rozmiar << '\n';
-    std::cout << "Całkowity czas: " << count+kontekst << '\n';
-    std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
+    std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
+    std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
+    std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
+    // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
+    int suma = 0;
     for (int i=0; i < dane.size(); ++i) {
-        std::cout << "Index: " << i << " Czas oczekiwania: " << dane.at(i) << '\n';
+        suma += dane.at(i);
+        // std::cout << "Index: " << i << " Czas oczekiwania: " << dane.at(i) << '\n';
     }
+    std::cout << "Łączny średni czas oczekiwania: " << suma/rozmiar << '\n';
 }
