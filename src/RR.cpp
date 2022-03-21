@@ -45,12 +45,13 @@ void RR::calculate(int shift) {
         int zmienna = v.at(i).getWaga() >= interwal ? interwal : v.at(i).getWaga();
         v.at(i).setWaga(v.at(i).getWaga()-zmienna);
         count += zmienna;
-        std::cout << i << '\n';
-        std::cout << v.at(i).getWaga() << '\n';
-        std::cout << "count: " << count << '\n';
         for (int j=0; j < zmienna; ++j) {
             if (Random::guess() == 1) {
                 nowyProces = true;
+                v.push_back(Generator::generujProces());
+                v.back().setIndex(rozmiar);
+                wagaAdd += v.back().getWaga();
+                ++rozmiar;
             }
         }
         auto match = dane.find(i);
@@ -63,11 +64,6 @@ void RR::calculate(int shift) {
         v.at(i).zeroOczekiwanie();
         ++kontekst;
         if (nowyProces) {
-            v.push_back(Generator::generujProces());
-            v.back().setIndex(rozmiar);
-            v.back().setOczekiwanie(zmienna);
-            wagaAdd += v.back().getWaga();
-            ++rozmiar;
             return;
         }
     }

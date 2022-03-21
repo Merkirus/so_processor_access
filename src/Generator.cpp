@@ -9,7 +9,7 @@
 std::vector<Proces> Generator::generujProcesy(int liczba) {
     std::vector<Proces> v;
     v.reserve(liczba);
-for (int i=0; i < liczba; i++) {
+    for (int i=0; i < liczba; i++) {
         v.push_back(generujProces());
         v.at(i).setIndex(i);
     }
