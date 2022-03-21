@@ -44,7 +44,6 @@ wagaAdd{0} {
 
 void RR::calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> end) {
     for (auto it = begin; it != end; ++it) {
-        int czas = it->getWaga();
         int zmienna = it->getWaga() >= interwal ? interwal : it->getWaga();
         count += zmienna;
         it->setWaga(zmienna);
@@ -64,7 +63,7 @@ void RR::calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> en
         } else {
             dane.insert(std::pair<int, std::vector<int>> (it->getIndex(), std::vector{it->getOczekiwanie()}));
         }
-        for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(czas);});
+        for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(zmienna);});
         it->zeroOczekiwanie();
     }
 }
@@ -78,14 +77,15 @@ void RR::display() {
     int suma = 0;
     for (int i=0; i < rozmiar; ++i) {
         auto temp = dane.find(i);
-        int sum = 0;
-        for (int elem : temp->second) {
-            std::cout << elem << '\n';
-            sum+=elem;
+        if (temp != dane.end()) {
+            int sum = 0;
+            for (int elem : temp->second) {
+                sum+=elem;
+            }
+            int temp2 = sum/temp->second.size();
+            suma += temp2;
+            std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << temp2  << '\n';
         }
-        int temp2 = sum/temp->second.size();
-        suma += temp2;
-        std::cout << "Index: " << temp->first << " Średni czas oczekiwania: " << temp2  << '\n';
     }
     std::cout << "Łączny średni czas oczekiwania: " << suma/rozmiar << '\n';
 }
