@@ -70,6 +70,7 @@ void SJFW::display() {
     for (int i=0; i < rozmiar; ++i) {
         auto match = dane.find(i);
         if (match != dane.end()) {
+            suma += match->second;
             std::cout << "Index: " << match->first  << " Średni czas oczekiwania: " << match->second << " Waga: " << wagi.at(match->first)  << '\n'; 
         }
     }
