@@ -78,7 +78,7 @@ void RR::display() {
     std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
     std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
     std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
-    std::cout << "Całkowity czas wykonania: " << count << '\n';
+    std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
     double stosunek = (double)kontekst/(double)(count+kontekst);
     printf("Stosunek kontekstu do czasu wykonania %.2f%%\n", stosunek*100);
     // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
