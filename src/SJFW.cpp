@@ -49,9 +49,9 @@ void SJFW::run() {
             if (changed) {
                 sort(v.begin(), v.end(), [](Proces& p1, Proces& p2) -> bool {return p1.getWaga() < p2.getWaga();});
                 v.front().zeroOczekiwanie();
-            }
-            if (curr.getIndex() != v.front().getIndex()) {
-                ++kontekst;
+                if (curr.getIndex() != v.front().getIndex()) {
+                    ++kontekst;
+                }
             }
         } else {
             v.erase(v.begin());

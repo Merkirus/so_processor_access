@@ -48,12 +48,14 @@ void RR::calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> en
         int zmienna = it->getWaga() >= interwal ? interwal : it->getWaga();
         count += zmienna;
         it->setWaga(zmienna);
-        if (Random::guess(zmienna) == 1) {
+        for (int i=0; i < zmienna; ++i) {
+            if (Random::guess() == 1) {
             v.push_back(Generator::generujProces());
             v.back().setIndex(rozmiar);
             wagaAdd += v.back().getWaga();
             ++add;
             ++rozmiar;
+            }    
         }
         ++kontekst;
         auto match = dane.find(it->getIndex());
