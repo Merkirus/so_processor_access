@@ -10,11 +10,9 @@
 
 void RR::run() {
     while (!v.empty() && rozmiar != 200) {
-        calculate(0);
-        while (nowyProces) {
-            nowyProces = false;
+        add = 0;
+        while (add != -1) {
             calculate(add);
-            add = 0;
         }
         auto end = std::remove_if(v.begin(),
          v.end(),
@@ -40,7 +38,7 @@ wagaAdd{0} {
 }
 
 void RR::calculate(int shift) {
-    for (int i=0; i < v.size(); ++i) {
+    for (int i=shift; i < v.size(); ++i) {
         ++add;
         int zmienna = v.at(i).getWaga() >= interwal ? interwal : v.at(i).getWaga();
         v.at(i).setWaga(v.at(i).getWaga()-zmienna);
@@ -60,13 +58,16 @@ void RR::calculate(int shift) {
         } else {
             dane.insert(std::pair<int, std::vector<int>> (i, std::vector{v.at(i).getOczekiwanie()}));
         }
-        for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(zmienna);});
+        for_each(v.begin(), v.end(), [&](Proces& p) {p.addOczekiwanie(zmienna);});
         v.at(i).zeroOczekiwanie();
-        ++kontekst;
         if (nowyProces) {
+            nowyProces = false;
+            ++kontekst;
             return;
         }
+        ++kontekst;
     }
+    add = -1;
 }
 
 void RR::display() {

@@ -44,7 +44,7 @@ void SJFW::run() {
             } else {
                 dane.insert(std::pair<int,long> (curr.getIndex(), curr.getOczekiwanie()));
             }
-            for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(1);});
+            for_each(v.begin(), v.end(), [&](Proces& p) {p.addOczekiwanie(1);});
             v.front().zeroOczekiwanie();
             if (changed) {
                 sort(v.begin(), v.end(), [](Proces& p1, Proces& p2) -> bool {return p1.getWaga() < p2.getWaga();});
@@ -68,7 +68,7 @@ void SJFW::display() {
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
     double stosunek = (double)kontekst/(double)(count+kontekst);
     printf("Stosunek kontekstu do czasu wykonania %.2f%%\n", stosunek*100);
-    // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
+    //std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     int suma = 0;
     for (int i=0; i < rozmiar; ++i) {
         auto match = dane.find(i);

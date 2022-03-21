@@ -23,9 +23,9 @@ wagaAdd{0} {
 void FCFS::run() {
     while (!v.empty() && rozmiar != 200) {
         int czas = v.front().getWaga();
-        while (v.front().getWaga()>0) {
-            v.front().setWaga();
-            ++count;
+        v.front().setWaga(0);
+        count += czas;
+        for (int i=0; i < czas; ++i) {
             if (Random::guess() == 1) {
                 v.push_back(Generator::generujProces());
                 wagaAdd += v.back().getWaga();
@@ -34,8 +34,7 @@ void FCFS::run() {
         }
         dane.push_back(v.front().getOczekiwanie());
         v.erase(v.begin());
-        // Kontekst nie uwzględniony w oczekiwaniu procesu
-        for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(czas);});
+        for_each(v.begin(), v.end(), [&](Proces& p) {p.addOczekiwanie(czas);});
         ++kontekst;
     }
 }

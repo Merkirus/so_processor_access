@@ -12,7 +12,7 @@ public:
     void setWaga();
     void setWaga(int interwal);
     int getOczekiwanie() const;
-    void setOczekiwanie(int czas);
+    void addOczekiwanie(int czas);
     void zeroOczekiwanie();
     void setIndex(int indeks);
     int getIndex() const;

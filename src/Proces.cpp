@@ -23,7 +23,7 @@ int Proces::getOczekiwanie() const {
     return oczekiwanie;
 }
 
-void Proces::setOczekiwanie(int czas) {
+void Proces::addOczekiwanie(int czas) {
     this->oczekiwanie += czas;
 }
 
