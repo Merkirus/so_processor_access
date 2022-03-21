@@ -25,12 +25,12 @@ void FCFS::run() {
         int czas = v.front().getWaga();
         while (v.front().getWaga()>0) {
             v.front().setWaga();
+            ++count;
             if (Random::guess() == 1) {
                 v.push_back(Generator::generujProces());
-                wagaAdd += v.at(v.size()-1).getWaga();
+                wagaAdd += v.back().getWaga();
                 ++rozmiar;
             }
-            ++count;
         }
         dane.push_back(v.front().getOczekiwanie());
         v.erase(v.begin());
@@ -46,6 +46,8 @@ void FCFS::display() {
     std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
     std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
+    double stosunek = (double)kontekst/(double)(count+kontekst);
+    printf("Stosunek kontekstu do czasu wykonania %.2f%%\n", stosunek*100);
     // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     int suma = 0;
     for (int i=0; i < dane.size(); ++i) {

@@ -10,15 +10,11 @@
 
 void RR::run() {
     while (!v.empty() && rozmiar != 200) {
-        auto b = v.begin();
-        auto e = v.end();
-        calculate(b,e);
-        while (add != 0) {
-            int temp = add;
+        calculate(0);
+        while (nowyProces) {
+            nowyProces = false;
+            calculate(add);
             add = 0;
-            b = v.end()-add;
-            e = v.end();
-            calculate(b,e);
         }
         auto end = std::remove_if(v.begin(),
          v.end(),
@@ -34,6 +30,7 @@ rozmiar{static_cast<int>(v.size())},
 count{0},
 kontekst{0},
 add{0},
+nowyProces{false},
 interwal{interwal},
 wagaInit{0},
 wagaAdd{0} {
@@ -42,29 +39,37 @@ wagaAdd{0} {
     wagaInit = sum;
 }
 
-void RR::calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> end) {
-    for (auto it = begin; it != end; ++it) {
-        int zmienna = it->getWaga() >= interwal ? interwal : it->getWaga();
+void RR::calculate(int shift) {
+    for (int i=0; i < v.size(); ++i) {
+        ++add;
+        int zmienna = v.at(i).getWaga() >= interwal ? interwal : v.at(i).getWaga();
+        v.at(i).setWaga(v.at(i).getWaga()-zmienna);
         count += zmienna;
-        it->setWaga(zmienna);
-        for (int i=0; i < zmienna; ++i) {
+        std::cout << i << '\n';
+        std::cout << v.at(i).getWaga() << '\n';
+        std::cout << "count: " << count << '\n';
+        for (int j=0; j < zmienna; ++j) {
             if (Random::guess() == 1) {
-            v.push_back(Generator::generujProces());
-            v.back().setIndex(rozmiar);
-            wagaAdd += v.back().getWaga();
-            ++add;
-            ++rozmiar;
-            }    
+                nowyProces = true;
+            }
         }
-        ++kontekst;
-        auto match = dane.find(it->getIndex());
-        if (match != dane.end()) {
-            match->second.push_back(it->getOczekiwanie());
+        auto match = dane.find(i);
+        if  (match != dane.end()) {
+            match->second.push_back(v.at(i).getOczekiwanie());
         } else {
-            dane.insert(std::pair<int, std::vector<int>> (it->getIndex(), std::vector{it->getOczekiwanie()}));
+            dane.insert(std::pair<int, std::vector<int>> (i, std::vector{v.at(i).getOczekiwanie()}));
         }
         for_each(v.begin(), v.end(), [&](Proces& p) {p.setOczekiwanie(zmienna);});
-        it->zeroOczekiwanie();
+        v.at(i).zeroOczekiwanie();
+        ++kontekst;
+        if (nowyProces) {
+            v.push_back(Generator::generujProces());
+            v.back().setIndex(rozmiar);
+            v.back().setOczekiwanie(zmienna);
+            wagaAdd += v.back().getWaga();
+            ++rozmiar;
+            return;
+        }
     }
 }
 
@@ -73,7 +78,9 @@ void RR::display() {
     std::cout << "Waga dodatkowych procesów: " << wagaAdd << '\n';
     std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
     std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
-    std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
+    std::cout << "Całkowity czas wykonania: " << count << '\n';
+    double stosunek = (double)kontekst/(double)(count+kontekst);
+    printf("Stosunek kontekstu do czasu wykonania %.2f%%\n", stosunek*100);
     // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     int suma = 0;
     for (int i=0; i < rozmiar; ++i) {

@@ -12,7 +12,7 @@
 class RR {
 public:
     RR(std::vector<Proces> v, int interwal);
-    void calculate(std::__wrap_iter<Proces*> begin, std::__wrap_iter<Proces*> end);
+    void calculate(int shift);
     void run();
     void display();
 private:
@@ -22,6 +22,7 @@ private:
     int count;
     int kontekst;
     int add;
+    bool nowyProces;
     int interwal;
     int wagaInit;
     int wagaAdd;

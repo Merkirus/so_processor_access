@@ -12,11 +12,11 @@ int Proces::getWaga() const {
 }
 
 void Proces::setWaga() {
-    --waga;
+   this->waga -= 1;
 }
 
-void Proces::setWaga(int interwal) {
-    waga -= interwal;
+void Proces::setWaga(int waga) {
+    this->waga = waga;
 }
 
 int Proces::getOczekiwanie() const {
@@ -24,15 +24,15 @@ int Proces::getOczekiwanie() const {
 }
 
 void Proces::setOczekiwanie(int czas) {
-    oczekiwanie += czas;
+    this->oczekiwanie += czas;
 }
 
 void Proces::zeroOczekiwanie() {
-    oczekiwanie = 0;
+    this->oczekiwanie = 0;
 }
 
 void Proces::setIndex(int indeks) {
-    index = indeks;
+    this->index = indeks;
 }
 
 int Proces::getIndex() const {

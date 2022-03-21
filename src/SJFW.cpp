@@ -66,6 +66,8 @@ void SJFW::display() {
     std::cout << "Waga całkowita procesów: " << wagaAdd+wagaInit << '\n';
 	std::cout << "Średnia waga procesu: " << (wagaAdd+wagaInit)/rozmiar << '\n';
     std::cout << "Całkowity czas wykonania: " << count+kontekst << '\n';
+    double stosunek = (double)kontekst/(double)(count+kontekst);
+    printf("Stosunek kontekstu do czasu wykonania %.2f%%\n", stosunek*100);
     // std::cout << "Oczekiwanie poszczególnych procesów: " << '\n';
     int suma = 0;
     for (int i=0; i < rozmiar; ++i) {
@@ -79,7 +81,12 @@ void SJFW::display() {
     if (!v.empty()) {
     	std::cout << "Procesy zagłodzone: " << '\n';
     	for (Proces p : v) {
-    		std::cout << "Index: " << p.getIndex() << " Waga: " << p.getWaga() << '\n';
+            auto match = wagi.find(p.getIndex());
+            if (match != wagi.end()) {
+                if (match->second == p.getWaga() && rozmiar-p.getIndex() > rozmiar/10) {
+    		      std::cout << "Index: " << p.getIndex() << " Waga: " << p.getWaga() << '\n';
+                }
+            }
     	}
     }
 }
