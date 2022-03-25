@@ -10,7 +10,7 @@ using namespace std;
 
 auto main() -> int {
 
-	std::vector<Proces> procesy {Generator::generujProcesy(100)};
+	std::vector<Proces> procesy {Generator::generujProcesy(150)};
 	// std::vector<Proces> procesy1 {Generator::generujProcesy(50)};
 	// std::vector<Proces> procesy2 {Generator::generujProcesy(50)};
 	// std::vector<Proces> procesy3 {Generator::generujProcesy(50)};
@@ -24,7 +24,7 @@ auto main() -> int {
 	// FCFS fcfs4 (procesy4);
 	// FCFS fcfs5 (procesy5);
 
-	RR rr (procesy, 100);
+	RR rr (procesy, 1);
 	// RR rr1 (procesy1, 5);
 	// RR rr2 (procesy2, 5);
 	// RR rr3 (procesy3, 5);
